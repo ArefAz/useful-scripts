@@ -1,3 +1,6 @@
+# Author: Aref Azizpour
+# Date: 5/17/2020
+
 import os
 import glob
 import pandas as pd

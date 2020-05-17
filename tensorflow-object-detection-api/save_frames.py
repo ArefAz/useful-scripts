@@ -1,3 +1,6 @@
+# Author: Aref Azizpour
+# Date: 5/17/2020
+
 import os
 import cv2
 import argparse
