@@ -14,14 +14,10 @@ optional arguments:
 """
 import os
 import re
-import shutil
-from PIL import Image
 from shutil import copyfile
 import argparse
-import glob
 import math
 import random
-import xml.etree.ElementTree as ET
 
 
 def iterate_dir(source, dest, ratio, copy_xml):
@@ -39,36 +35,35 @@ def iterate_dir(source, dest, ratio, copy_xml):
               if re.search(r'([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$', f)]
 
     num_images = len(images)
-    num_test_images = math.ceil(ratio*num_images)
+    num_test_images = math.ceil(ratio * num_images)
 
     for i in range(int(num_test_images)):
-        idx = random.randint(0, len(images)-1)
+        idx = random.randint(0, len(images) - 1)
         filename = images[idx]
         copyfile(os.path.join(source, filename),
                  os.path.join(test_dir, filename))
         if copy_xml:
-            xml_filename = os.path.splitext(filename)[0]+'.xml'
+            xml_filename = os.path.splitext(filename)[0] + '.xml'
             try:
-            	copyfile(os.path.join(source, xml_filename),
-                     	os.path.join(test_dir,xml_filename))
+                copyfile(os.path.join(source, xml_filename),
+                         os.path.join(test_dir, xml_filename))
             except:
-            	pass
+                pass
         images.remove(images[idx])
 
     for filename in images:
         copyfile(os.path.join(source, filename),
                  os.path.join(train_dir, filename))
         if copy_xml:
-            xml_filename = os.path.splitext(filename)[0]+'.xml'
+            xml_filename = os.path.splitext(filename)[0] + '.xml'
             try:
-            	copyfile(os.path.join(source, xml_filename),
-                     	os.path.join(train_dir, xml_filename))
+                copyfile(os.path.join(source, xml_filename),
+                         os.path.join(train_dir, xml_filename))
             except:
-            	pass
+                pass
 
 
 def main():
-
     # Initiate argument parser
     parser = argparse.ArgumentParser(description="Partition dataset of images into training and testing sets",
                                      formatter_class=argparse.RawTextHelpFormatter)
