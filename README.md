@@ -23,7 +23,16 @@ Note that your data should have this structure:
             test
             train
             
-6. `partition_dataset.py -i IMAGEDIR -r RATIO -x` 
+6. `python partition_dataset.py -i IMAGEDIR -r RATIO -x` 
+
+7. `pyhton Object_detection_video.py /path/to/frozen_inference_graph/directory --video /path/to/a/video`
 
 ##### please open an issue if you find a bug
+
+refrences:
+
+
+   https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#5-create-label-map-and-configure-training
+   https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/
+    
 
