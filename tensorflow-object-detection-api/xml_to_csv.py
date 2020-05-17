@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 """ Converts all of the annotations in the 'train' and 'test' directories (which are labeled using labelImg) into csv files.  
     This csv files could then be used as the input of generate_tfrecord.py to generate tfrecords """
 
+
 def xml_to_csv(path):
     xml_list = []
     for xml_file in glob.glob(path + '/*.xml'):
@@ -28,7 +29,7 @@ def xml_to_csv(path):
 
 
 def main():
-    for folder in ['train','test']:
+    for folder in ['train', 'test']:
         image_path = os.path.join(os.getcwd(), ('images/' + folder))
         xml_df = xml_to_csv(image_path)
         xml_df.to_csv(('images/' + folder + '_labels.csv'), index=None)

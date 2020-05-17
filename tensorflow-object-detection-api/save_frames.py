@@ -1,6 +1,6 @@
 import os
 import cv2
-import argparse 
+import argparse
 import glob
 import time
 
@@ -11,8 +11,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("input", help="camera device ID (0,1, etc.), or path to video file (default: -1)", nargs='?',
                         default='-1')
-    parser.add_argument('--name','-n',help='an arbitrary name just in case of preventing filename conflicts',required=True)
-    parser.add_argument('--step','-s',help='frame step', default='10')
+    parser.add_argument('--name', '-n', help='an arbitrary name just in case of preventing filename conflicts',
+                        required=True)
+    parser.add_argument('--step', '-s', help='frame step', default='10')
     args = parser.parse_args()
     video_file = args.input
     user_name = args.name
@@ -33,21 +34,20 @@ if __name__ == '__main__':
     else:
         img_num = 0
 
-
     go = 1
     itr = 0
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
-            print('##'*20 +'End of File' + '##'*20)
+            print('##' * 20 + 'End of File' + '##' * 20)
             break
 
         cv2.imshow('frame', frame)
         cv2.waitKey(1)
         key = cv2.waitKey(go) & 0xFF
         if key == ord('q'):
-        	cv2.destroyAllWindows()
-        	break
+            cv2.destroyAllWindows()
+            break
         if key == ord(' '):
             go = 1 - go
         if key == ord('f'):  # frame by frame
@@ -57,10 +57,10 @@ if __name__ == '__main__':
                 cap.grab()
         # if key == ord('s'):
         if itr == step:
-        	itr = 0
-        	cv2.imwrite(os.path.join('images','{}_img_{}.jpg').format(user_name,img_num), frame)
-        	img_num += 1
-        	print('image {} saved to images'.format('{}_img_{}.jpg'.format(user_name,img_num)))
+            itr = 0
+            cv2.imwrite(os.path.join('images', '{}_img_{}.jpg').format(user_name, img_num), frame)
+            img_num += 1
+            print('image {} saved to images'.format('{}_img_{}.jpg'.format(user_name, img_num)))
 
         itr += 1
     exit()

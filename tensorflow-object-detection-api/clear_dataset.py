@@ -12,16 +12,13 @@ parser.add_argument("input", help="path to folder containing the iamges and anno
 args = parser.parse_args()
 
 images_folder_path = args.input
-jpg_fnames = glob.glob(os.path.join(images_folder_path,'*.jpg'))
+jpg_fnames = glob.glob(os.path.join(images_folder_path, '*.jpg'))
 other_folder_path = 'unwanted_frames'
 os.system('mkdir -p {}'.format(other_folder_path))
 
 for jpg_fname in jpg_fnames:
-	xml_fname = jpg_fname.split('.')[0] + '.xml'
-	# print(xml_fname)	
-	# time.sleep(5)
-	if not os.path.isfile(xml_fname):
-		os.system('mv -v {} {}'.format(jpg_fname, other_folder_path))
-
-
-
+    xml_fname = jpg_fname.split('.')[0] + '.xml'
+    # print(xml_fname)
+    # time.sleep(5)
+    if not os.path.isfile(xml_fname):
+        os.system('mv -v {} {}'.format(jpg_fname, other_folder_path))
